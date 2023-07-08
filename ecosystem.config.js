@@ -23,7 +23,7 @@ module.exports = {
       host: "157.230.183.123",
       ref: "origin/master",
       repo: "git@github.com:wisdomcsharp/project-cv.git",
-      path: "/home/www",
+      path: "/home/www/project-cv",
       key: "/Users/obinnaoparaocha/.ssh/hypewize_ai",
       'pre-deploy-local': '',
       'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production',
