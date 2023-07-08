@@ -3,7 +3,7 @@ const { password, objectId } = require('./custom.validation');
 
 const createCv = {
   body: Joi.object().keys({
-    cv: Joi.string(),
+    cv: Joi.object(),
     url: Joi.string(),
   }),
 };

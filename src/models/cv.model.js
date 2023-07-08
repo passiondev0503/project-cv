@@ -9,7 +9,7 @@ const cvSchema = mongoose.Schema(
       required: true,
     },
     cv: {
-      type: String,
+      type: Object,
       required: true,
     },
     url: {
