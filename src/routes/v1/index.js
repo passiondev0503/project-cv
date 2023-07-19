@@ -4,6 +4,7 @@ const userRoute = require('./user.route');
 const docsRoute = require('./docs.route');
 const cvRoute = require('./cv.route');
 const config = require('../../config/config');
+const uploadRoute = require('./upload.route');
 
 const router = express.Router();
 
@@ -20,6 +21,10 @@ const defaultRoutes = [
     path: '/cvs',
     route: cvRoute,
   },
+  {
+    path: '/uploads',
+    route: uploadRoute,
+  }
 ];
 
 const devRoutes = [
