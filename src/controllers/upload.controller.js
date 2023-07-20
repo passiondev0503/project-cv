@@ -16,6 +16,14 @@ const getUploads = catchAsync(async (req, res) => {
   res.send(result);
 });
 
+const getUpload = catchAsync(async (req, res) => {
+  const upload = await uploadService.getUploadById(req.params.uploadId);
+  if (!upload) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Upload not found');
+  }
+  res.send(upload);
+});
+
 const deleteUpload = catchAsync(async (req, res) => {
   await uploadService.deleteUploadById(req.params.uploadId);
   res.status(httpStatus.NO_CONTENT).send();
@@ -24,5 +32,6 @@ const deleteUpload = catchAsync(async (req, res) => {
 module.exports = {
   createUpload,
   getUploads,
+  getUpload,
   deleteUpload,
 };

@@ -5,8 +5,8 @@ const validate = require('../../middlewares/validate');
 const uploadValidation = require('../../validations/upload.validation');
 const uploadController = require('../../controllers/upload.controller');
 const imageFileFilter = (req, file, cb) => {
-    const allowedMimeTypes = /\.(jpg|jpeg|png|gif|svg|webp)$/i;
-    
+    const allowedMimeTypes = /^image\/(jpeg|png|gif|svg\+xml|webp)$/i;
+
     if (file.mimetype.match(allowedMimeTypes)) {
         cb(null, true);
     } else {
@@ -23,6 +23,7 @@ router
 
 router
     .route('/:uploadId')
+    .get(auth('getUploads'), validate(uploadValidation.getUpload), uploadController.getUpload)
     .delete(auth('manageUploads'), validate(uploadValidation.deleteUpload), uploadController.deleteUpload);
 
 module.exports = router;
