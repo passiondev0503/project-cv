@@ -102,7 +102,25 @@ const queryUploads = async (filter, options) => {
  * @returns {Promise<Upload>}
  */
 const getUploadById = async (id) => {
-  return Upload.findById(id);
+  let upload = await Upload.findById(id);
+
+  if (upload) {
+    const url = s3.getSignedUrl('getObject', {
+      Bucket: config.aws.bucketName,
+      Key: upload.key,
+      Expires: Number(config.aws.bucketExpires)
+    });
+
+    upload = {
+      _id: upload._id,
+      url,
+      expires: Number(config.aws.bucketExpires),
+      name: upload.name,
+      contentType: upload.contentType,
+    }
+  }
+
+  return upload;
 };
 
 /**

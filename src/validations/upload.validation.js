@@ -24,6 +24,12 @@ const getUploads = {
   }),
 };
 
+const getUpload = {
+  params: Joi.object().keys({
+    uploadId: Joi.string().custom(objectId),
+  }),
+};
+
 
 const deleteUpload = {
   params: Joi.object().keys({
@@ -34,5 +40,6 @@ const deleteUpload = {
 module.exports = {
   createUpload,
   getUploads,
+  getUpload,
   deleteUpload,
 };
