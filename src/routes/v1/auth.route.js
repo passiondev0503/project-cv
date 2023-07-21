@@ -1,8 +1,10 @@
 const express = require('express');
+const passport = require('passport');
 const validate = require('../../middlewares/validate');
 const authValidation = require('../../validations/auth.validation');
 const authController = require('../../controllers/auth.controller');
 const auth = require('../../middlewares/auth');
+const { successHandler } = require('../../config/morgan');
 
 const router = express.Router();
 
@@ -15,7 +17,17 @@ router.post('/reset-password', validate(authValidation.resetPassword), authContr
 router.post('/send-verification-email', auth(), authController.sendVerificationEmail);
 router.post('/verify-email', validate(authValidation.verifyEmail), authController.verifyEmail);
 
+router.get('/google', passport.authenticate('google'));
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), authController.loginSocial);
+
+router.get('/linkedin', passport.authenticate('linkedin'));
+router.get('/linkedin/callback', passport.authenticate('linkedin', { failureRedirect: '/login' }), authController.loginSocial);
+
+router.get('/twitter', passport.authenticate('twitter'));
+router.get('/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), authController.loginSocial);
+
 module.exports = router;
+
 
 /**
  * @swagger

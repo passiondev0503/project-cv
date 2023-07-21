@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { authService, userService, tokenService, emailService } = require('../services');
+const config = require('../config/config');
 
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -47,6 +48,18 @@ const verifyEmail = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const loginSocial = catchAsync(async (req, res) => {
+  const userAuth = {
+    name: req.user.displayName,
+    socialId: `${req.user.provider}-${req.user.id}`,
+    email: req.user.emails[0].value,
+  }
+  const user = await authService.loginSocial(userAuth.name, userAuth.email, userAuth.socialId);
+  const tokens = await tokenService.generateAuthTokens(user);
+  res.redirect(config.frontend.url + `/access_token/${tokens.access.token}`);
+});
+
+
 module.exports = {
   register,
   login,
@@ -56,4 +69,5 @@ module.exports = {
   resetPassword,
   sendVerificationEmail,
   verifyEmail,
+  loginSocial
 };

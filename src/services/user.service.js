@@ -46,6 +46,10 @@ const getUserByEmail = async (email) => {
   return User.findOne({ email });
 };
 
+const getUserBySocialId = async (socialId) => {
+  return User.findOne({ socialId });
+};
+
 /**
  * Update user by id
  * @param {ObjectId} userId
@@ -84,6 +88,7 @@ module.exports = {
   queryUsers,
   getUserById,
   getUserByEmail,
+  getUserBySocialId,
   updateUserById,
   deleteUserById,
 };
