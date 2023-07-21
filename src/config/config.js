@@ -28,6 +28,17 @@ const envVarsSchema = Joi.object()
     AWS_REGION: Joi.string().required().description('AWS region'),
     AWS_BUCKET_NAME: Joi.string().required().description('AWS bucket name'),
     AWS_BUCKET_EXPIRES: Joi.string().required().description('AWS bucket expires'),
+    GOOGLE_CLIENT_ID: Joi.string().required().description('Google client ID'),
+    GOOGLE_CLIENT_SECRET: Joi.string().required().description('Google client secret'),
+    GOOGLE_CALLBACK_URL: Joi.string().required().description('Google callback URL'),
+    LINKEDIN_CLIENT_ID: Joi.string().required().description('LinkedIn client ID'),
+    LINKEDIN_CLIENT_SECRET: Joi.string().required().description('LinkedIn client secret'),
+    LINKEDIN_CALLBACK_URL: Joi.string().required().description('LinkedIn callback URL'),
+    TWITTER_CONSUMER_KEY: Joi.string().required().description('Twitter consumer key'),
+    TWITTER_CONSUMER_SECRET: Joi.string().required().description('Twitter consumer secret'),
+    TWITTER_CALLBACK_URL: Joi.string().required().description('Twitter callback URL'),
+    EXPRESS_SESSION_SECRET: Joi.string().required().description('Express session secret'),
+    EXPRESS_COOKIE_SECURE: Joi.boolean().required().description('Express cookie secure'),
   })
   .unknown();
 
@@ -72,5 +83,26 @@ module.exports = {
     region: envVars.AWS_REGION,
     bucketName: envVars.AWS_BUCKET_NAME,
     bucketExpires: envVars.AWS_BUCKET_EXPIRES,
+  },
+  oauth: {
+    google: {
+      clientId: envVars.GOOGLE_CLIENT_ID,
+      clientSecret: envVars.GOOGLE_CLIENT_SECRET,
+      callbackUrl: envVars.GOOGLE_CALLBACK_URL,
+    },
+    linkedin: {
+      clientId: envVars.LINKEDIN_CLIENT_ID,
+      clientSecret: envVars.LINKEDIN_CLIENT_SECRET,
+      callbackUrl: envVars.LINKEDIN_CALLBACK_URL,
+    },
+    twitter: {
+      consumerKey: envVars.TWITTER_CONSUMER_KEY,
+      consumerSecret: envVars.TWITTER_CONSUMER_SECRET,
+      callbackUrl: envVars.TWITTER_CALLBACK_URL,
+    }
+  },
+  express: {
+    session_secret: envVars.EXPRESS_SESSION_SECRET,
+    cookie_secure: envVars.EXPRESS_COOKIE_SECURE,
   }
 };

@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { authService, userService, tokenService, emailService } = require('../services');
+const config = require('../config/config');
 
 const register = catchAsync(async (req, res) => {
   const user = await userService.createUser(req.body);
@@ -47,6 +48,37 @@ const verifyEmail = catchAsync(async (req, res) => {
   res.status(httpStatus.NO_CONTENT).send();
 });
 
+const handleGoogleLogin = catchAsync(async (req, res) => {
+  const userProfile = req.user;
+
+  // Perform actions with the user's profile (e.g., save to database, generate tokens, etc.)
+  console.log(req.user);
+  // Send a response or redirect as needed
+  res.send({ user: req.user });
+  // res.status(httpStatus.NO_CONTENT).send();
+});
+
+const handleLinkedInLogin = catchAsync(async (req, res) => {
+  const userProfile = req.user;
+
+  // Perform actions with the user's profile (e.g., save to database, generate tokens, etc.)
+  console.log(req.user);
+  // Send a response or redirect as needed
+  res.send({ user: req.user });
+  // res.status(httpStatus.NO_CONTENT).send();
+});
+
+const handleTwitterLogin = catchAsync(async (req, res) => {
+  const userProfile = req.user;
+
+  // Perform actions with the user's profile (e.g., save to database, generate tokens, etc.)
+  console.log(req.user);
+  // Send a response or redirect as needed
+  // res.redirect('https://example.com');
+  res.send({ user: req.user });
+  // res.status(httpStatus.NO_CONTENT).send();
+});
+
 module.exports = {
   register,
   login,
@@ -56,4 +88,7 @@ module.exports = {
   resetPassword,
   sendVerificationEmail,
   verifyEmail,
+  handleGoogleLogin,
+  handleLinkedInLogin,
+  handleTwitterLogin
 };

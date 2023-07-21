@@ -8,10 +8,11 @@ const passport = require('passport');
 const httpStatus = require('http-status');
 const config = require('./config/config');
 const morgan = require('./config/morgan');
-const { jwtStrategy } = require('./config/passport');
+const { jwtStrategy, twitterStrategy, googleStrategy, linkedInStrategy } = require('./config/passport');
 const { authLimiter } = require('./middlewares/rateLimiter');
 const routes = require('./routes/v1');
 const { errorConverter, errorHandler } = require('./middlewares/error');
+const session = require('express-session');
 const ApiError = require('./utils/ApiError');
 
 const app = express();
@@ -41,9 +42,20 @@ app.use(compression());
 app.use(cors());
 app.options('*', cors());
 
+app.use(session({
+  secret: config.express.session_secret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: config.express.cookie_secure }  // if you are using https, if not set to false
+}));
+
 // jwt authentication
 app.use(passport.initialize());
+app.use(passport.session()); // Add session support
 passport.use('jwt', jwtStrategy);
+passport.use('google', googleStrategy);
+passport.use('linkedin', linkedInStrategy);
+passport.use('twitter', twitterStrategy);
 
 // limit repeated failed requests to auth endpoints
 if (config.env === 'production') {
