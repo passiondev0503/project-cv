@@ -14,12 +14,10 @@ const jwtOptions = {
 
 // // serialize and deserialize user
 passport.serializeUser((user, done) => {
-  console.log("serializeUser: ", user);
   done(null, user.id);
 });
 passport.deserializeUser((id, done) => {
   // In this callback, you would fetch the user from your database using the ID
-  console.log("deserializeUser");
   done(null, { user: id });
 });
 

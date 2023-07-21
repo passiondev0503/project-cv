@@ -18,13 +18,13 @@ router.post('/send-verification-email', auth(), authController.sendVerificationE
 router.post('/verify-email', validate(authValidation.verifyEmail), authController.verifyEmail);
 
 router.get('/google', passport.authenticate('google'));
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), authController.handleGoogleLogin);
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }), authController.loginSocial);
 
 router.get('/linkedin', passport.authenticate('linkedin'));
-router.get('/linkedin/callback', passport.authenticate('linkedin', { failureRedirect: '/login' }), authController.handleLinkedInLogin);
+router.get('/linkedin/callback', passport.authenticate('linkedin', { failureRedirect: '/login' }), authController.loginSocial);
 
 router.get('/twitter', passport.authenticate('twitter'));
-router.get('/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), authController.handleTwitterLogin);
+router.get('/twitter/callback', passport.authenticate('twitter', { failureRedirect: '/login' }), authController.loginSocial);
 
 module.exports = router;
 

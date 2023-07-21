@@ -39,6 +39,7 @@ const envVarsSchema = Joi.object()
     TWITTER_CALLBACK_URL: Joi.string().required().description('Twitter callback URL'),
     EXPRESS_SESSION_SECRET: Joi.string().required().description('Express session secret'),
     EXPRESS_COOKIE_SECURE: Joi.boolean().required().description('Express cookie secure'),
+    FRONTEND_URL: Joi.string().required().description('Frontend URL'),
   })
   .unknown();
 
@@ -104,5 +105,8 @@ module.exports = {
   express: {
     session_secret: envVars.EXPRESS_SESSION_SECRET,
     cookie_secure: envVars.EXPRESS_COOKIE_SECURE,
+  },
+  frontend: {
+    url: envVars.FRONTEND_URL,
   }
 };
