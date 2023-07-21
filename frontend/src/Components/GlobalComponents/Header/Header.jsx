@@ -22,7 +22,7 @@ function ProfileMenu() {
                 <Button
                     variant="text"
                     color="blue-gray"
-                    className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
+                    className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 ml-auto hover:bg-transparent"
                 >
                     <div className="text-right me-2	">
                         <Typography variant="h1" className="normal-case text-light-grey text-xs	font-medium	">
@@ -55,7 +55,7 @@ export default function Header() {
 
 
     return (
-        <Navbar className="p-2 shadow-none max-w-screen-0xl bg-dark-black rounded-none border-transparent py-4 px-5">
+        <Navbar className="bg-opacity-100 p-2 shadow-none max-w-screen-0xl bg-[#18191b] rounded-none border-transparent py-4 px-5">
             <div className="relative mx-auto flex items-end text-blue-gray-900">
                 <div className="cv_builder_heading">
                     <Typography
