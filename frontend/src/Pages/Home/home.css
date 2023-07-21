@@ -1,0 +1,38 @@
+.home-wrapper {
+    display: flex;
+
+}
+
+.home_wrapper_full {
+    display: flex;
+}
+
+.border-gradient {
+    border-radius: 20px;
+    border-width: 1px;
+    background-image: linear-gradient(100.4deg, #7741EE 5.5%, #FE65C4 99.7%);
+    border: 2px solid transparent;
+    box-shadow: 2px 1000px 1px #fff inset;
+    background-origin: border-box;
+}
+
+@media(max-width:767px) {
+
+    .home-wrapper,
+    .home_wrapper_full {
+        display: block;
+        background-color: #18191B;
+        padding: 0px 15px 0px 13px;
+        height: 100vh;
+    }
+
+    .bg-home-white-smoke {
+        border-radius: 15px;
+    }
+
+    .bg-home-white-smoke .w-\[400px\] {
+        width: auto;
+    }
+
+
+}

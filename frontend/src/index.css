@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* color code css */
+:root {
+    --activeTab-color: #252628;
+    --purple-color:#9B7EDB;
+}
