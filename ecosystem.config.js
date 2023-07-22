@@ -43,7 +43,7 @@ module.exports = {
       path: "/home/www/project-cv",
       key: "/Users/obinnaoparaocha/.ssh/hypewize_ai",
       'pre-deploy-local': '',
-      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production && cd frontend && npm install',
+      'post-deploy': 'npm install && cd frontend && npm install && cd .. && pm2 reload ecosystem.config.js --env production',
       'pre-setup': ''
     }
   }
