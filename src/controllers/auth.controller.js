@@ -49,12 +49,28 @@ const verifyEmail = catchAsync(async (req, res) => {
 });
 
 const loginSocial = catchAsync(async (req, res) => {
-  const userAuth = {
-    name: req.user.displayName,
+  let userAuth = {
     socialId: `${req.user.provider}-${req.user.id}`,
     email: req.user.emails[0].value,
+    alternativeEmail: req.user.emails[0].value,
+    isEmailVerified: true
   }
-  const user = await authService.loginSocial(userAuth.name, userAuth.email, userAuth.socialId);
+  switch (req.user.provider) {
+    case 'google':
+      userAuth.firstName = req.user.name.givenName;
+      userAuth.lastName = req.user.name.familyName;
+      userAuth.location = req.user._json.locale;
+      break;
+    case 'twitter':
+      userAuth.firstName = req.user.displayName;
+      userAuth.location = req.user._json.location;
+      break;
+    case 'linkedin':
+      userAuth.firstName = req.user.name.givenName;
+      userAuth.lastName = req.user.name.familyName;
+      break;
+  }
+  const user = await authService.loginSocial(userAuth);
   const tokens = await tokenService.generateAuthTokens(user);
   res.redirect(config.frontend.url + `/access_token/${tokens.access.token}`);
 });

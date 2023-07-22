@@ -22,19 +22,17 @@ const loginUserWithEmailAndPassword = async (email, password) => {
   return user;
 };
 
-const loginSocial = async (name, email, socialId) => {
-  let user = await userService.getUserBySocialId(socialId);
+const loginSocial = async (authUser) => {
+  let { email, ...rest } = authUser;
+  let user = await userService.getUserBySocialId(rest.socialId);
 
   if (!user) {
     const isEmailTaken = await userService.getUserByEmail(email);
-    const newUser = { name, socialId, isEmailVerified: true, alternativeEmail: email };
-
     if (!isEmailTaken) {
-      newUser.email = email;
-      delete newUser.alternativeEmail;
+      rest.email = email;
+      delete rest.alternativeEmail;
     }
-
-    user = await userService.createUser(newUser);
+    user = await userService.createUser(rest);
   }
 
   return user;

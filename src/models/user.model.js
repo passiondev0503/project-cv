@@ -6,16 +6,55 @@ const { roles } = require('../config/roles');
 
 const userSchema = mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-      trim: true,
+    photoUploadId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Upload',
     },
     socialId: {
       type: String,
       unique: true,
       trim: true,
     },
+    firstName: {
+      type: String,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      trim: true,
+    },
+    phoneNumber: {
+      type: String,
+      trim: true,
+    },
+    dateOfBirth: {
+      type: Date,
+    },
+    websiteUrl: {
+      type: String,
+      trim: true,
+    },
+    linkedinUrl: {
+      type: String,
+      trim: true,
+    },
+    twitterUrl: {
+      type: String,
+      trim: true,
+    },
+    youtubeUrl: {
+      type: String,
+      trim: true,
+    },
+    location: {
+      type: String,
+      trim: true,
+    },
+    /**
+     * alternativeEmail field is used to store a user's email when they're trying to create an account using a social account, 
+     * but the email they're using is already registered with another account. In such cases, the email is stored in the alternativeEmail field.
+     * @property {string} alternativeEmail - The alternative email of the user. 
+     */
     alternativeEmail: {
       type: String,
       trim: true,
@@ -57,6 +96,12 @@ const userSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+//alterantiveEmail
+/*
+alternative email is used to save a users email, when they're trying to create an account with a social account,
+but the email they're using is already in use by another account..... so we save the email in the alternativeEmail field..
+*/
 
 // add plugin that converts mongoose to json
 userSchema.plugin(toJSON);
