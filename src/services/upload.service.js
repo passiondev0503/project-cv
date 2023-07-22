@@ -44,11 +44,7 @@ const createUpload = async (userId, files) => {
     // At this point, the file has been uploaded to S3, and response.Location contains the URL
     const mongoResponse = await Upload.create(_upload);
 
-    const URL = await s3.getSignedUrl('getObject', {
-      Bucket: 'project-cv-new',
-      Key: params.Key,
-      Expires: Number(config.aws.bucketExpires), // time to expire in seconds
-    });
+    const URL = await getS3SignedUrlFromKey(params.Key)
 
     uploads.push({
       _id: mongoResponse._id,
@@ -95,6 +91,15 @@ const queryUploads = async (filter, options) => {
 
   return uploads;
 };
+
+const getS3SignedUrlFromKey = async (key) => {
+  const url = s3.getSignedUrl('getObject', {
+    Bucket: config.aws.bucketName,
+    Key: key,
+    Expires: Number(config.aws.bucketExpires)
+  });
+  return url;
+}
 
 /**
  * Get upload by id
@@ -148,4 +153,5 @@ module.exports = {
   queryUploads,
   getUploadById,
   deleteUploadById,
+  getS3SignedUrlFromKey
 };
