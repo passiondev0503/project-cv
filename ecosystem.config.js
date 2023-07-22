@@ -1,6 +1,6 @@
 module.exports = {
   apps: [{
-    name: "project-cv",
+    name: "project-cv server",
     script: "src/index.js",
     instances: 1,
     autorestart: true,
@@ -15,6 +15,23 @@ module.exports = {
       NODE_ENV: "production",
       NODE_OPTIONS: '--max-old-space-size=1536',
     }
+  },
+  {
+    name: "project-cv frontend",
+    cwd: "frontend", // Set the current working directory to the frontend directory
+    script: "npm",
+    args: "run start", //production: run build && npm run start
+    instances: 1,
+    autorestart: true,
+    watch: true,
+    time: true,
+    env: {
+      NODE_ENV: "production"
+    },
+    exec_mode: "cluster",
+    env_production: {
+      NODE_ENV: "production",
+    }
   }],
 
   deploy: {
@@ -26,7 +43,7 @@ module.exports = {
       path: "/home/www/project-cv",
       key: "/Users/obinnaoparaocha/.ssh/hypewize_ai",
       'pre-deploy-local': '',
-      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production',
+      'post-deploy': 'npm install && pm2 reload ecosystem.config.js --env production && cd frontend && npm install',
       'pre-setup': ''
     }
   }
