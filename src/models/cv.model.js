@@ -8,13 +8,18 @@ const cvSchema = mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    cv: {
+    data: {
       type: Object,
       required: true,
+      trim: true,
+    },
+    metadata: {
+      type: Object,
+      trim: true,
     },
     url: {
       type: String,
-      required: true,
+      trim: true,
     }
   },
   {

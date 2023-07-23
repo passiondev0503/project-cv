@@ -3,8 +3,8 @@ const { password, objectId } = require('./custom.validation');
 
 const createCv = {
   body: Joi.object().keys({
-    cv: Joi.object(),
-    url: Joi.string(),
+    description: Joi.string().required(),
+    url: Joi.string().required(),
   }),
 };
 
@@ -29,7 +29,8 @@ const updateCv = {
   }),
   body: Joi.object()
     .keys({
-      cv: Joi.string(),
+      data: Joi.object(),
+      metadata: Joi.object()
     })
     .min(1),
 };
