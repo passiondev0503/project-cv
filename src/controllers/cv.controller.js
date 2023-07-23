@@ -11,19 +11,19 @@ const createCv = catchAsync(async (req, res) => {
 });
 
 const getCvs = catchAsync(async (req, res) => {
-  const filter = pick(req.query, ['search']);
-  let searchFilter = {};
+  let filter = pick(req.query, ['search']);
+  filter.userId = req.user.id; // only get the cv of the logged in user
   if (filter.search) {
-    searchFilter = {
-      cv: {
+    filter.search = {
+      url: {
         $regex: filter.search,
         $options: 'i', // 'i' for case-insensitive search
       },
     };
   }
-
+console.log(filter)
   const options = pick(req.query, ['sortBy', 'limit', 'page']);
-  const result = await cvService.queryCvs(searchFilter, options);
+  const result = await cvService.queryCvs(filter, options);
   res.send(result);
 });
 

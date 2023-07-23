@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const { Cv } = require('../models');
 const ApiError = require('../utils/ApiError');
+const { createCvData } = require('../config/dev.sample');
 
 /**
  * Create a cv
@@ -8,7 +9,9 @@ const ApiError = require('../utils/ApiError');
  * @returns {Promise<Cv>}
  */
 const createCv = async (cvBody) => {
-  return Cv.create(cvBody);
+  const { userId, url } = cvBody;
+  const testdata = { data: createCvData, metadata: {"notes": "we use metadata to keep settings and configs"}, url, userId };
+  return Cv.create(testdata);
 };
 
 /**
