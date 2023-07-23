@@ -1,8 +1,17 @@
 const createCvData = {
+    "photo": {
+        "uploadId": "64bc96cdcc3584424d52fefc",
+        "url": "https://www.gold.ac.uk/media/images-by-section/departments/music/staff/Guy-Baron.jpg",
+        "contentType": "image/jpeg"
+    },
+    "firstName": "Jack",
+    "lastName": "Michael",
     "phone_number": "+447534676372",
     "website": "https://google.com",
-    "profile_mage": "base_64",
-    "full_name": "Jack O",
+    "websiteUrl": "https://example.com/website",
+    "linkedinUrl": "https://example.com/linkedin",
+    "twitterUrl": "https://example.com/twitter",
+    "youtubeUrl": "https://example.com/youtube",
     "position": "Aftersales Representative",
     "summary": "Outgoing and detail-oriented Aftersales Representative experienced in luxury brand customer service. Skilled in repair management, client engagement, and administration tasks.",
     "skills": [
