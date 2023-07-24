@@ -1,49 +1,87 @@
-.sidebar-tabs {
-    height: calc(100vh - 97px);
+.sidebar-tabs,
+.sidebar-tabs-visible {
+    height: calc(100vh - 69px);
 }
 
 .absolute.inset-0.z-10.h-full.bg-white.rounded-md.shadow {
-    background-color: var(--activeTab-color);
+    display: none;
+
 }
 
-.place-items-start .absolute.inset-0.z-10.h-full.bg-white.rounded-md.shadow {
-    border-radius: 11px 0px 0px 11px;
-}
 
 .design_tabs .absolute.inset-0.z-10.h-full.bg-white.rounded-md.shadow {
     background-color: transparent;
     border-bottom: 1px solid var(--purple-color);
     border-radius: 0px;
+    display: block;
+}
+
+.right_arrow_tootltip_content:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #000000 transparent transparent;
+}
+
+.active-tab {
+    background-color: var(--activeTab-color);
+    border-radius: 11px 0px 0px 11px;
+}
+
+.active-tab p {
+    color: #fff;
+}
+
+.active-tab svg path {
+    fill: var(--purple-color);
+}
+
+.active-tab .uploadtab svg path {
+    fill: var(--purple-color);
+    stroke: var(--purple-color);
+}
+
+@media(min-width:767px) and (max-width:1920px) {
+    .tab_content {
+        height: 100% !important;
+    }
 }
 
 @media(max-width:767px) {
 
-    .sidebar-tabs .sidebar_tabs {
+    .sidebar-tabs-visible .sidebar_tabs {
         position: fixed;
         bottom: 0px;
-        width: 96%;
+        width: 100%;
         z-index: 999;
         border-radius: 0px;
-        left: 10px;
-        padding: 16px 0px;
+        left: 0px;
+        padding: 16px 15px;
         flex-direction: row;
         justify-content: center;
         background-color: #18191b;
         height: 82px;
     }
 
+
     .tab_content {
-        width: 96%;
+        width: auto;
         height: 600px;
         position: fixed;
         bottom: 72px;
         border-radius: 15px 15px 15px 15px;
         z-index: 999;
-        left: 10px;
+        left: 0px;
+        right: 0px;
+        margin: 0px 13px;
     }
 
-    .tab_content:before {
-        content: '';
+    .scroll {
+
         background: #9B7EDB;
         height: 10px;
         width: 48px;
@@ -57,6 +95,12 @@
 
     .sidebar-tabs {
         height: auto;
+        display: none;
+    }
+
+    .sidebar-tabs-visible {
+        height: auto;
+        display: block;
     }
 
     .sidebar-close-btn {
@@ -65,10 +109,10 @@
 
 
     .design_tabs .absolute.inset-0.z-10.h-full.bg-white.rounded-md.shadow {
-        border-radius: 0px;
+        border-radius: 0px !important;
     }
 
-    .place-items-start .absolute.inset-0.z-10.h-full.bg-white.rounded-md.shadow {
+    .active-tab {
         border-radius: 12px;
     }
 

@@ -22,6 +22,7 @@ module.exports = withMT({
         'light-grey': '#8E939D',
         'AiInput-color': '#9AA8B7',
         'InputBorder-color': '#FF65C5',
+        'aiWriter-color': '#343537',
       },
     },
   },
