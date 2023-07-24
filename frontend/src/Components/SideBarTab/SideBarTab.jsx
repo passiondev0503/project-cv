@@ -19,9 +19,9 @@ import UploadTabIcon from "../../assets/Svg/HomePageSvg/UploadTabIcon";
 import HistoryTabIcon from "../../assets/Svg/HomePageSvg/HistoryTabIcon";
 import DesignSectionTabs from "./DesignSectionTabs";
 
-export default function SideBarTab({ toggleProp }) {
+export default function SideBarTab({ toggleProp, sideBarOption, onTouchStart, splitPosition }) {
   const [siderTogle, setSiderTogle] = useState(false);
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(0);
 
   const activeTabHandler = () => {
     setSiderTogle(true)
@@ -33,42 +33,44 @@ export default function SideBarTab({ toggleProp }) {
   }
 
   return (
-    <Tabs value={activeTab} orientation="vertical" className="  overflow-visible sidebar-tabs">
+    <Tabs TabIndicatorProps={{
+      style: { display: 'none' }
+    }} value={activeTab} orientation="vertical" className={!sideBarOption ? " overflow-visible sidebar-tabs" : " overflow-visible sidebar-tabs-visible"}>
       <TabsHeader className="w-[72px] pe-0 bg-transparent pt-0 ps-2 sidebar_tabs">
 
 
-        <Tab key={1} value={1} className="place-items-start py-3" onClick={() => {activeTabHandler(); setActiveTab(1)}} >
+        <Tab key={1} value={1} className={`place-items-start py-3 ${activeTab === 1 ? "active-tab" : ""}`} onClick={() => { activeTabHandler(); setActiveTab(1) }} >
           <div className="">
             <DesignIcon />
-            <Typography className="text-[10px] text-white ">Design</Typography>
+            <Typography className="text-[10px] text-grey-color">Design</Typography>
 
           </div>
         </Tab>
-        <Tab key={2} value={2} className="place-items-start py-3" onClick={() => {activeTabHandler(); setActiveTab(2)}} >
+        <Tab key={2} value={2} className={`place-items-start py-3 ${activeTab === 2 ? "active-tab" : ""}`} onClick={() => { activeTabHandler(); setActiveTab(2) }} >
           <div className="text-center">
             <ElementIcon className='m-auto' />
-            <Typography className="text-[10px]">Element</Typography>
+            <Typography className="text-[10px] text-grey-color">Element</Typography>
 
           </div>
         </Tab>
-        <Tab key={3} value={3} className="place-items-start py-3" onClick={() => {activeTabHandler(); setActiveTab(3)}}  >
+        <Tab key={3} value={3} className={`place-items-start py-3 ${activeTab === 3 ? "active-tab" : ""}`} onClick={() => { activeTabHandler(); setActiveTab(3) }}  >
           <div className="">
             <TextIcon className='m-auto' />
-            <Typography className="text-[10px]">History</Typography>
+            <Typography className="text-[10px] text-grey-color">History</Typography>
 
           </div>
         </Tab>
-        <Tab key={4} value={4} className="place-items-start py-3" onClick={() => {activeTabHandler(); setActiveTab(4)}}  >
-          <div className="">
+        <Tab key={4} value={4} className={`place-items-start py-3 ${activeTab === 4 ? "active-tab" : ""}`} onClick={() => { activeTabHandler(); setActiveTab(4) }}  >
+          <div className="uploadtab">
             <UploadTabIcon className='m-auto' />
-            <Typography className="text-[10px]">Uploads</Typography>
+            <Typography className="text-[10px] text-grey-color">Uploads</Typography>
 
           </div>
         </Tab>
-        <Tab key={5} value={5} className="place-items-start py-3" onClick={() => {activeTabHandler(); setActiveTab(5)}}  >
+        <Tab key={5} value={5} className={`place-items-start py-3 ${activeTab === 5 ? "active-tab" : ""}`} onClick={() => { activeTabHandler(); setActiveTab(5) }}  >
           <div className="">
             <HistoryTabIcon className='m-auto' />
-            <Typography className="text-[10px]">History</Typography>
+            <Typography className="text-[10px] text-grey-color">History</Typography>
 
           </div>
         </Tab>
@@ -77,7 +79,7 @@ export default function SideBarTab({ toggleProp }) {
       {
         siderTogle && (
           <>
-            <TabsBody className="py-3.5 px-6 bg-light-black relative overflow-visible  w-[350px] tab_content"
+            <TabsBody style={{ height: `${100 - splitPosition}%` }} className={`py-3.5 px-6 bg-light-black relative overflow-visible  w-[350px] tab_content rounded-bl-[15px]`}
               animate={{
                 initial: { y: 250 },
                 mount: { y: 0 },
@@ -85,6 +87,7 @@ export default function SideBarTab({ toggleProp }) {
               }}
 
             >
+              <button onTouchStart={onTouchStart} className="scroll"></button>
               <TabPanel key={1} value={1} className="py-0">
                 <div className="search-input relative">
                   <Input
@@ -100,7 +103,7 @@ export default function SideBarTab({ toggleProp }) {
                     <Search />
                   </div>
                 </div>
-               <DesignSectionTabs/>
+                <DesignSectionTabs />
 
               </TabPanel>
               <TabPanel key={2} value={2} className="py-0">
@@ -122,7 +125,7 @@ export default function SideBarTab({ toggleProp }) {
 
               </TabPanel>
               <div className="sidebar-close-btn absolute right-[-16px] top-[50%] translate-y-[-50%] z-10">
-                <Tooltip content="Hide" placement="right">
+                <Tooltip content="Hide" placement="right" className="right_arrow_tootltip_content">
                   <button onClick={hideHandle}><RightArrow /> </button>
                 </Tooltip>
               </div>
@@ -131,6 +134,6 @@ export default function SideBarTab({ toggleProp }) {
         )
       }
 
-    </Tabs >
+    </ Tabs >
   );
 }
