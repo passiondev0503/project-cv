@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Navbar,
 
@@ -11,10 +11,14 @@ import {
 
 } from "@material-tailwind/react";
 import ExportIcon from "../../../assets/Svg/MobileViewSvg/ExportIcon";
+import { Link } from "react-router-dom"
 
 
 function ProfileMenu() {
-
+    const [ProfileToggle, setProfileTogle] = useState(false)
+    const handleProfileButton = () => {
+        setProfileTogle(!ProfileToggle)
+    }
 
 
     return (
@@ -37,6 +41,7 @@ function ProfileMenu() {
                         <ExportIcon />
                     </div>
                     <Avatar
+                        onClick={handleProfileButton}
                         variant="circular"
                         size="sm"
                         alt="tania andrew"
@@ -46,6 +51,18 @@ function ProfileMenu() {
 
                 </Button>
             </MenuHandler>
+            {
+
+                ProfileToggle && (
+                    <>
+                        <div className="profile_dropdown absolute top-[74px] right-0 grid bg-white py-[12px] px-[9px] rounded-[10px]">
+                            <Link to="" className="px-[22px] py-[6px] rounded-[10px] text-[14px] font-normal text-black-color hover:bg-dropdownHover-color">Profile</Link>
+                            <Link to="" className="px-[22px] py-[6px] rounded-[10px] text-[14px] font-normal text-black-color hover:bg-dropdownHover-color">Billing</Link>
+                            <Link to="" className="px-[22px] py-[6px] rounded-[10px] text-[14px] font-normal text-logout-color hover:bg-dropdownHover-color">Logout</Link>
+                        </div>
+                    </>
+                )
+            }
 
         </Menu>
     );
@@ -59,7 +76,7 @@ export default function Header() {
 
 
     return (
-        <Navbar className="bg-opacity-100 p-2 shadow-none max-w-screen-0xl bg-[#18191b] rounded-none border-transparent py-4 px-5">
+        <Navbar className="bg-opacity-100 p-2 shadow-none max-w-screen-0xl bg-[#18191b] rounded-none border-transparent py-4 px-5 relative z-10">
             <div className="relative mx-auto flex items-end text-blue-gray-900">
                 <div className="cv_builder_heading">
                     <Typography
