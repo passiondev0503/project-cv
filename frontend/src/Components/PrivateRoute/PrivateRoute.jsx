@@ -19,6 +19,7 @@ const PrivateRoute = ({ children }) => {
             </>
         );
     } else {
+        localStorage.removeItem("token")
         return <Navigate to="/login" replace />;
     }
 };

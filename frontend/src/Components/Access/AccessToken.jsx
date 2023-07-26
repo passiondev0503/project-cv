@@ -17,7 +17,6 @@ const AccessToken = () => {
                 "expiry": expiry
             };
             localStorage.setItem("token", JSON.stringify(userToken));
-            console.log(userToken);
             navigate("/");
         }
     }, []);

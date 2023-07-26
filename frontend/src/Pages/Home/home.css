@@ -64,6 +64,10 @@
     display: none;
 }
 
+/* profile section css */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    }
 
 
 @media(max-width:992px) {
