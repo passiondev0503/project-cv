@@ -11,13 +11,19 @@ import {
 
 } from "@material-tailwind/react";
 import ExportIcon from "../../../assets/Svg/MobileViewSvg/ExportIcon";
-import { Link } from "react-router-dom"
+import { Link , Navigate } from "react-router-dom"
 
 
 function ProfileMenu() {
     const [ProfileToggle, setProfileTogle] = useState(false)
     const handleProfileButton = () => {
         setProfileTogle(!ProfileToggle)
+    }
+
+    const logoutHandle = () => {
+        localStorage.removeItem("token")
+        return <Navigate to="/login" replace />;
+
     }
 
 
@@ -58,7 +64,7 @@ function ProfileMenu() {
                         <div className="profile_dropdown absolute top-[74px] right-0 grid bg-white py-[12px] px-[9px] rounded-[10px]">
                             <Link to="/profile" className="px-[22px] py-[6px] rounded-[10px] text-[14px] font-normal text-black-color hover:bg-dropdownHover-color">Profile</Link>
                             <Link to="" className="px-[22px] py-[6px] rounded-[10px] text-[14px] font-normal text-black-color hover:bg-dropdownHover-color">Billing</Link>
-                            <Link to="" className="px-[22px] py-[6px] rounded-[10px] text-[14px] font-normal text-logout-color hover:bg-dropdownHover-color">Logout</Link>
+                            <div onClick={logoutHandle} to="" className="px-[22px] py-[6px] rounded-[10px] text-[14px] font-normal text-logout-color hover:bg-dropdownHover-color">Logout</div>
                         </div>
                     </>
                 )
@@ -71,9 +77,6 @@ function ProfileMenu() {
 
 
 export default function Header() {
-    const [isNavOpen, setIsNavOpen] = React.useState(false);
-    const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
-
 
     return (
         <Navbar className="bg-opacity-100 p-2 shadow-none max-w-screen-0xl bg-[#18191b] rounded-none border-transparent py-4 px-5 relative z-10">

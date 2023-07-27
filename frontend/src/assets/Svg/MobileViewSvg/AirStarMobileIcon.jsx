@@ -8,16 +8,16 @@ const AirStarMobileIcon = () => {
             <path d="M26.5088 32.7429C25.7579 29.1959 23.7324 26.8444 20.0273 25.9157C23.7127 24.9869 25.748 22.6453 26.4989 18.9698C27.2498 22.6354 29.295 24.9869 33.0001 25.9058C29.3148 26.8246 27.2597 29.1663 26.5088 32.7429Z" fill="url(#paint2_linear_116_4686)" />
             <defs>
                 <linearGradient id="paint0_linear_116_4686" x1="0.533085" y1="4.90051" x2="14.454" y2="30.1114" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FE65C4" />
-                    <stop offset="1" stop-color="#7741EE" />
+                    <stop stopColor="#FE65C4" />
+                    <stop offset="1" stopColor="#7741EE" />
                 </linearGradient>
                 <linearGradient id="paint1_linear_116_4686" x1="16.2787" y1="0.000121965" x2="23.2212" y2="13.3661" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FE65C4" />
-                    <stop offset="1" stop-color="#7741EE" />
+                    <stop stopColor="#FE65C4" />
+                    <stop offset="1" stopColor="#7741EE" />
                 </linearGradient>
                 <linearGradient id="paint2_linear_116_4686" x1="20.3222" y1="18.9698" x2="27.2232" y2="32.3777" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FE65C4" />
-                    <stop offset="1" stop-color="#7741EE" />
+                    <stop stopColor="#FE65C4" />
+                    <stop offset="1" stopColor="#7741EE" />
                 </linearGradient>
             </defs>
         </svg>

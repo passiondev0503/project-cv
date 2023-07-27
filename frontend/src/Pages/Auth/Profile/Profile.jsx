@@ -16,6 +16,7 @@ import '../../Home/home.css';
 
 import { useDispatch, useSelector } from "react-redux"
 import { getProfileData, updateProfileData, getImageIDRequest } from '../../../Redux/Actions/Profile/profileAction';
+import LocationIcon from '../../../assets/Svg/ProfileSvg/LocationIcon';
 
 
 const initialState = {
@@ -39,10 +40,10 @@ const Profile = () => {
 
 
   const dispatch = useDispatch()
-  const { data, updatedProfile, isProfileUpdated, updateProfileError, imageData } = useSelector((state) => state.profile)
+  const { data, updatedProfile, isProfileUpdated, updateProfileError, imageData, is_image_Uploaded } = useSelector((state) => state.profile)
 
-  const imageUrl = imageData && imageData[0] && imageData[0].url ? imageData[0].url : data?.profilePhotoUrl
-
+  const imageUrl = imageData && imageData[0] && imageData[0].url ? imageData[0].url : data?.profilePhotoUrl;
+console.log("data" , data)
 
   const profilehandle = (event) => {
     const { name, value } = event.target;
@@ -103,43 +104,45 @@ const Profile = () => {
 
 
   return (
-    <div className='bg-dark-black' style={{ height: "calc(100vh - 90px)", }}>
-      <div class="flex flex-col items-center justify-center px-[15px] md:pt-[5px] pt-[30px]  md:mx-auto  bg-dark-black">
-        <div class=" rounded-xl w-[100%] lg:w-[400px] h-[650px] border border-light-grey">
-          <div className=" pt-[10px] pb-[10px] px-[25px] sm:px-[30px]  ">
+    <div className='bg-dark-black profile_page' style={{ minHeight: "calc(100vh - 85px)", }}>
+      <div className="flex flex-col items-center justify-center px-[15px] md:pt-[5px] pt-[30px]  md:mx-auto  bg-dark-black">
+        <div className=" rounded-xl  border border-light-grey">
+          <div className=" pt-[10px] pb-[15px] px-[25px] sm:px-[30px]  ">
             <div className='relative md:hidden'>
               <div className='absolute top-[7px] left-[9px]'>
                 <BackArrow />
               </div>
               <button className=' bg-aiWriter-color text-grey-color text-[12px] font-normal rounded-[50px] py-[4px] w-[68px] '>Back</button>
             </div>
-            <h1 class="md:m-[0px] mt-[-32px] text-[25px] font-semibold text-white text-center pb-[15px]">
+            <h1 className="md:m-[0px] mt-[-32px] text-[25px] font-semibold text-white text-center pb-[15px]">
               Your Profile
             </h1>
-            <div className="click_to_upload w-fit m-auto border border-light-grey rounded-[15px] w-[100px] h-[100px] relative cursor-pointer">
+            <div className="click_to_upload m-auto border border-light-grey rounded-[15px] w-[100px] h-[100px] relative cursor-pointer">
+
               {
-                data && data?.profilePhotoUrl ? (
-                  <>
-                    <img src={imageUrl} alt='image not found ' className='h-[100px] w-[100px] rounded-[15px]' />
-                  </>
+                is_image_Uploaded ? (
+                  <div className='flex h-[100px]'>
+                    <Spinner style={{ margin: "auto" }} />
+                  </div>
                 ) : (
-                  <>
-                    <Typography className="text-[12px] text-light-grey">Click to upload</Typography>
-                    <UserIcon />
-                  </>
-
-
+                  data && data?.profilePhotoUrl || imageData && imageData[0] ? (
+                    <>
+                      <img src={imageUrl} alt='image not found ' className='h-[100px] w-[100px] rounded-[15px]' />
+                    </>
+                  ) : (
+                    <div onClick={handleImageUpload} className="py-[17px] px-[8px]">
+                      <UserIcon />
+                      <Typography className="text-[12px] text-light-grey">Click to upload</Typography>
+                    </div>
+                  )
                 )
               }
-
-
-
               <div onClick={handleImageUpload} className="absolute top-[-12px] right-[-7px] w-[25px] h-[25px] rounded-[100px] bg-pruple-color flex justify-center items-center ">
                 <PencilIcon />
                 <input
                   ref={inputElement}
                   type="file"
-                  style={{ visibility: 'hidden', display:'none' }}
+                  style={{ visibility: 'hidden', display: 'none' }}
                   onChange={handleFileChange}
                 />
               </div>
@@ -168,6 +171,12 @@ const Profile = () => {
                 </div>
               </div>
               <div className='mt-[15px] relative'>
+                <input value={profileData?.location} onChange={profilehandle} name="location" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none' size="lg" placeholder="Enter your Location" />
+                <div className='absolute right-[9px] top-[10px]'>
+                  <LocationIcon/>
+                </div>
+              </div>
+              <div className='mt-[15px] relative'>
                 <input value={profileData?.websiteUrl} onChange={profilehandle} name="websiteUrl" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none' size="lg" placeholder="Your Website URL" />
                 <div className='absolute right-[9px] top-[10px]'>
                   <WebsiteUrlIcon />
@@ -191,7 +200,7 @@ const Profile = () => {
                   <FormYoutube />
                 </div>
               </div>
-              {updateProfileError && <Typography className="text-[#ef4444]">{updateProfileError}</Typography>}
+              {updateProfileError && updateProfileError?.message && <Typography className="text-[#ef4444]">{updateProfileError?.message}</Typography>}
               <div className='mt-[15px] '>
                 <button onClick={submitHandle} className='bg-green-color w-full py-[10px] rounded-[8px] text-[12px] font-bold text-white'> {isProfileUpdated ? <Spinner style={{ margin: "auto" }} /> : "Save"}</button>
               </div>

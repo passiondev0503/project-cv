@@ -3,6 +3,7 @@
     display: flex;
     background: #18191b;
     padding: 0px 18px 18px 0px;
+    min-height: calc(100vh - 68px);
 
 }
 
@@ -95,7 +96,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         display: block;
         background-color: #18191B;
         padding: 15px 15px;
-        /* height: 89vh; */
+        height: 92vh;
     }
 
     .bg-home-white-smoke {

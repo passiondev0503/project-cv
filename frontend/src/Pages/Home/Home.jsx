@@ -1,8 +1,7 @@
 
-import React, { useState, useRef } from 'react'
+import React, { useState} from 'react'
 // import './home.css'
 
-// import SideBarTab from '../../Components/SideBarTab/SideBarTab'
 import ExportSvg from '../../assets/Svg/HomePageSvg/ExportSvg'
 import { Typography } from '@material-tailwind/react'
 import Embed from '../../assets/Svg/HomePageSvg/Embed'
@@ -54,9 +53,6 @@ const Home = () => {
                 }
                 <div className='add_new_page_button text-center py-[18px] relative w-[50%]  m-auto '>
                     <button className=' w-[100%] m-auto  flex gap-5 justify-center  border border-[#E7E8E9] bg-white py-2 text-grey-color text-[11px] rounded-[10px]'>Add new page <span>+</span></button>
-
-
-
                 </div>
 
             </div>

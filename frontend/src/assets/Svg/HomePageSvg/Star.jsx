@@ -8,16 +8,16 @@ const Star = () => {
             <path d="M12.144 15C11.8 13.3751 10.8721 12.2979 9.1748 11.8724C10.8631 11.4469 11.7955 10.3742 12.1395 8.69043C12.4835 10.3697 13.4204 11.4469 15.1178 11.8679C13.4295 12.2888 12.488 13.3615 12.144 15Z" fill="url(#paint2_linear_116_423)" fill-opacity="0.5" />
             <defs>
                 <linearGradient id="paint0_linear_116_423" x1="0.244212" y1="2.24512" x2="6.62154" y2="13.7945" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FE65C4" />
-                    <stop offset="1" stop-color="#7741EE" />
+                    <stop stopColor="#FE65C4" />
+                    <stop offset="1" stopColor="#7741EE" />
                 </linearGradient>
                 <linearGradient id="paint1_linear_116_423" x1="7.45718" y1="-4.83142e-08" x2="10.6376" y2="6.12309" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FE65C4" />
-                    <stop offset="1" stop-color="#7741EE" />
+                    <stop stopColor="#FE65C4" />
+                    <stop offset="1" stopColor="#7741EE" />
                 </linearGradient>
                 <linearGradient id="paint2_linear_116_423" x1="9.30987" y1="8.69043" x2="12.4713" y2="14.8327" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FE65C4" />
-                    <stop offset="1" stop-color="#7741EE" />
+                    <stop stopColor="#FE65C4" />
+                    <stop offset="1" stopColor="#7741EE" />
                 </linearGradient>
             </defs>
         </svg>

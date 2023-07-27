@@ -8,16 +8,16 @@ const AiStarIcon = () => {
             <path d="M17.6725 21.8285C17.1719 19.4638 15.8216 17.8962 13.3516 17.277C15.8084 16.6579 17.1653 15.0968 17.6659 12.6465C18.1665 15.0902 19.53 16.6579 22.0001 17.2704C19.5432 17.883 18.1731 19.4441 17.6725 21.8285Z" fill="url(#paint2_linear_116_197)" />
             <defs>
                 <linearGradient id="paint0_linear_116_197" x1="0.35539" y1="3.26709" x2="9.636" y2="20.0743" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FE65C4" />
-                    <stop offset="1" stop-color="#7741EE" />
+                    <stop stopColor="#FE65C4" />
+                    <stop offset="1" stopColor="#7741EE" />
                 </linearGradient>
                 <linearGradient id="paint1_linear_116_197" x1="10.8521" y1="-7.03093e-08" x2="15.4805" y2="8.91062" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FE65C4" />
-                    <stop offset="1" stop-color="#7741EE" />
+                    <stop stopColor="#FE65C4" />
+                    <stop offset="1" stopColor="#7741EE" />
                 </linearGradient>
                 <linearGradient id="paint2_linear_116_197" x1="13.5481" y1="12.6465" x2="18.1488" y2="21.5851" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#FE65C4" />
-                    <stop offset="1" stop-color="#7741EE" />
+                    <stop stopColor="#FE65C4" />
+                    <stop offset="1" stopColor="#7741EE" />
                 </linearGradient>
             </defs>
         </svg>

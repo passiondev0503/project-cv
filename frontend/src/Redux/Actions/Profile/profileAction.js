@@ -1,5 +1,5 @@
 import { ActionType } from '../../ActionTypes/profile';
-import { getRequest, updateRequest , postRequest } from '../../../Service/MakeRequests';
+import { getRequest, updateRequest, postRequest } from '../../../Service/MakeRequests';
 import { getToken } from '../../../CommonUtils/common-utils';
 
 
@@ -27,6 +27,7 @@ export const getProfileData = () => async (dispatch) => {
 
 //update profile data action 
 export const updateProfileData = (data) => async (dispatch) => {
+
     const userData = await getToken();
     const id = userData?.userId;
     dispatch({ type: ActionType.UPDATE_PROFILE_DATA_IS_PENDING });
@@ -37,10 +38,16 @@ export const updateProfileData = (data) => async (dispatch) => {
                 type: ActionType.UPDATE_PROFILE_DATA_IS_SUCCESS,
                 payload: response.data,
             });
+        }else if(response.status === 400){
+            dispatch({
+                type: ActionType.UPDATE_PROFILE_DATA_IS_FAILURE,
+                payload: response?.data,
+            });
         }
+        console.log("response" , response)
 
     } catch (error) {
-
+        console.log("updateProfileData, " , error)
         dispatch({
             type: ActionType.UPDATE_PROFILE_DATA_IS_FAILURE,
             payload: error,
@@ -50,10 +57,13 @@ export const updateProfileData = (data) => async (dispatch) => {
 
 }
 
+// update Profile Image action 
 export const getImageIDRequest = (data) => async (dispatch) => {
 
+    dispatch({ type: ActionType.GET_IMAGE_ID_PENDING })
+
     try {
-        const response = await postRequest(`/uploads` , data);
+        const response = await postRequest(`/uploads`, data);
         if (response.status === 201) {
             dispatch({
                 type: ActionType.GET_IMAGE_ID_SUCCESS,
@@ -61,6 +71,8 @@ export const getImageIDRequest = (data) => async (dispatch) => {
             });
         }
     } catch (error) {
+
+        dispatch({ type: ActionType.GET_IMAGE_ID_FAILURE , payload:error })
         console.log(error);
     }
 }
