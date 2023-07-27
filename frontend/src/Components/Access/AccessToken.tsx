@@ -8,7 +8,7 @@ const AccessToken = () => {
 
     useEffect(() => {
         if (token) {
-            let decodedToken = jwt_decode(token);
+            let decodedToken:any = jwt_decode(token);
             let expiry = decodedToken?.exp;
             let userId = decodedToken?.sub;
             const userToken = {
@@ -19,7 +19,7 @@ const AccessToken = () => {
             localStorage.setItem("token", JSON.stringify(userToken));
             navigate("/");
         }
-    }, []);
+    }, [token]);
 
     return null;
 }

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef , ChangeEvent} from 'react';
 import { Typography } from '@material-tailwind/react';
 import UserIcon from '../../../assets/Svg/ProfileSvg/UserIcon';
 import PencilIcon from '../../../assets/Svg/ProfileSvg/PencilIcon';
@@ -17,9 +17,25 @@ import '../../Home/home.css';
 import { useDispatch, useSelector } from "react-redux"
 import { getProfileData, updateProfileData, getImageIDRequest } from '../../../Redux/Actions/Profile/profileAction';
 import LocationIcon from '../../../assets/Svg/ProfileSvg/LocationIcon';
+import { AppDispatch, RootState } from '../../../Store/store';
 
 
+
+interface initialType {
+  photoUploadId:string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  dateOfBirth: string;
+  websiteUrl: string;
+  linkedinUrl: string;
+  twitterUrl: string;
+  youtubeUrl: string;
+  location: string;
+  email: string;
+}
 const initialState = {
+  photoUploadId:"",
   firstName: "",
   lastName: "",
   phoneNumber: "",
@@ -35,16 +51,16 @@ const initialState = {
 
 const Profile = () => {
 
-  const [profileData, setProfileData] = useState(initialState)
-  const inputElement = useRef(null);
+  const [profileData, setProfileData] = useState<initialType>(initialState)
+  const inputElement = useRef<HTMLInputElement>(null);
 
 
-  const dispatch = useDispatch()
-  const { data, updatedProfile, isProfileUpdated, updateProfileError, imageData, is_image_Uploaded } = useSelector((state) => state.profile)
+  const dispatch = useDispatch<AppDispatch>()
+  const { data, updatedProfile, isProfileUpdated, updateProfileError, imageData, is_image_Uploaded } = useSelector((state:RootState) => state.profile)
 
   const imageUrl = imageData && imageData[0] && imageData[0].url ? imageData[0].url : data?.profilePhotoUrl;
 
-  const profilehandle = (event) => {
+  const profilehandle = (event:React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setProfileData({
       ...profileData, [name]: value
@@ -58,14 +74,17 @@ const Profile = () => {
     dispatch(getProfileData())
   }, [updatedProfile])
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
 
-    const formData = new FormData()
-    formData.append("files", file)
+    if (file) {
+      const formData = new FormData();
+      formData.append('files', file);
 
-    dispatch(getImageIDRequest(formData))
+      dispatch(getImageIDRequest(formData));
+    }
   };
+
 
   const handleImageUpload = () => {
     inputElement.current?.click();
@@ -148,53 +167,53 @@ const Profile = () => {
             </div>
             <div className="pt-[10px]">
               <div className='flex gap-[8px]'>
-                <input value={profileData?.firstName} onChange={profilehandle} name="firstName" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none ' size="lg" placeholder="First Name" />
-                <input value={profileData?.lastName} onChange={profilehandle} name='lastName' type='text' className='text-white text-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none' size="lg" placeholder="Last Name" />
+                <input value={profileData?.firstName} onChange={profilehandle} name="firstName" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none '  placeholder="First Name" />
+                <input value={profileData?.lastName} onChange={profilehandle} name='lastName' type='text' className='text-white text-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none'  placeholder="Last Name" />
               </div>
               <div className='mt-[15px] relative'>
-                <input value={profileData?.phoneNumber} onChange={profilehandle} name="phoneNumber" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none' size="lg" placeholder="Phone Number" />
+                <input value={profileData?.phoneNumber} onChange={profilehandle} name="phoneNumber" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none'  placeholder="Phone Number" />
                 <div className='absolute right-[9px] top-[10px]'>
                   <PhoneIcon />
                 </div>
               </div>
               <div className='mt-[15px] relative'>
-                <input value={profileData?.dateOfBirth} onChange={profilehandle} name='dateOfBirth' type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none' size="lg" placeholder="Date of Birth" />
+                <input value={profileData?.dateOfBirth} onChange={profilehandle} name='dateOfBirth' type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none'  placeholder="Date of Birth" />
                 <div className='absolute right-[9px] top-[10px]'>
                   <CalenderIcon />
                 </div>
               </div>
               <div className='mt-[15px] relative'>
-                <input value={profileData?.email} onChange={profilehandle} name="email" type='email' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none' size="lg" placeholder="Email Address" />
+                <input value={profileData?.email} onChange={profilehandle} name="email" type='email' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none'  placeholder="Email Address" />
                 <div className='absolute right-[9px] top-[10px]'>
                   <EmailIcon />
                 </div>
               </div>
               <div className='mt-[15px] relative'>
-                <input value={profileData?.location} onChange={profilehandle} name="location" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none' size="lg" placeholder="Enter your Location" />
+                <input value={profileData?.location} onChange={profilehandle} name="location" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none'  placeholder="Enter your Location" />
                 <div className='absolute right-[9px] top-[10px]'>
                   <LocationIcon/>
                 </div>
               </div>
               <div className='mt-[15px] relative'>
-                <input value={profileData?.websiteUrl} onChange={profilehandle} name="websiteUrl" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none' size="lg" placeholder="Your Website URL" />
+                <input value={profileData?.websiteUrl} onChange={profilehandle} name="websiteUrl" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none'  placeholder="Your Website URL" />
                 <div className='absolute right-[9px] top-[10px]'>
                   <WebsiteUrlIcon />
                 </div>
               </div>
               <div className='mt-[15px] relative'>
-                <input value={profileData?.linkedinUrl} onChange={profilehandle} name="linkedinUrl" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none' size="lg" placeholder="Linkedin " />
+                <input value={profileData?.linkedinUrl} onChange={profilehandle} name="linkedinUrl" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none'  placeholder="Linkedin " />
                 <div className='absolute right-[9px] top-[10px]'>
                   <FormLinkdin />
                 </div>
               </div>
               <div className='mt-[15px] relative'>
-                <input value={profileData?.twitterUrl} onChange={profilehandle} name="twitterUrl" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none' size="lg" placeholder="Twitter" />
+                <input value={profileData?.twitterUrl} onChange={profilehandle} name="twitterUrl" type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none'  placeholder="Twitter" />
                 <div className='absolute right-[9px] top-[10px]'>
                   <FormTwitter />
                 </div>
               </div>
               <div className='mt-[15px] relative'>
-                <input value={profileData?.youtubeUrl} onChange={profilehandle} name='youtubeUrl' type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none' size="lg" placeholder="YouTube" />
+                <input value={profileData?.youtubeUrl} onChange={profilehandle} name='youtubeUrl' type='text' className='text-white font-normal text-[14px] placeholder:text-light-grey placeholder:text-[14px] border border-light-grey focus:border-light-grey bg-aiWriter-color w-full py-[8px] px-[18px] rounded-[10px] focus-visible:outline-none'  placeholder="YouTube" />
                 <div className='absolute right-[9px] top-[10px]'>
                   <FormYoutube />
                 </div>

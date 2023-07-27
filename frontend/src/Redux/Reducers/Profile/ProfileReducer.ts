@@ -11,7 +11,7 @@ const initialState = {
     imageData: {},
     is_image_Uploaded: false
 }
-const profileReducer = (state = initialState, action) => {
+const profileReducer = (state = initialState, action:any) => {
     switch (action.type) {
         case ActionType.GET_PROFILE_DATA_IS_PENDING:
             return {

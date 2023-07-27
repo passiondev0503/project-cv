@@ -19,6 +19,7 @@ axiosInstance.interceptors.request.use(
     }
 );
 
+
 axiosInstance.interceptors.response.use(
     (response) => {
         return response;
@@ -38,22 +39,23 @@ axiosInstance.interceptors.response.use(
 );
 
 // get request
-export const getRequest = async (slug) => {
+export const getRequest = async (slug:string) => {
     try {
         const response = await axiosInstance.get(slug);
         return response;
-    } catch (error) {
+    } catch (error:any) {
         console.error("Error occurred:", error.message);
         return Promise.reject(error.message);
     }
 };
 
+
 // path request
-export const updateRequest = async (slug , data)=>{
+export const updateRequest = async (slug:string , data:any)=>{
     try{
         const response = await axiosInstance.patch(slug , data);
         return response;
-    }catch (error) {
+    }catch (error:any) {
         return error?.response
     }
 
@@ -61,11 +63,11 @@ export const updateRequest = async (slug , data)=>{
 
 
 
-export const postRequest = async (slug , data)=>{
+export const postRequest = async (slug:string , data:any)=>{
     try{
         const response = await axiosInstance.post(slug , data);
         return response;
-    }catch (error) {
+    }catch (error:any) {
         console.error("Error occurred:", error.message);
         return Promise.reject(error.message);
     }

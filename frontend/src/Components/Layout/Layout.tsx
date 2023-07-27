@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, {TouchEvent , useRef, useState } from 'react'
 import Header from '../GlobalComponents/Header/Header'
 import SideBarTab from '../SideBarTab/SideBarTab'
 import BottomTabs from '../BottomTabs/BottomTabs'
 import { useLocation } from "react-router-dom"
 
-const Layout = ({ children }) => {
+const Layout = ({ children }:any) => {
   const location = useLocation(); // Get the current location
   const isAccessTokenPath = location.pathname.includes('/access_token/');
   const isProfileRoute = location.pathname.includes('/profile');
@@ -23,10 +23,10 @@ const Layout = ({ children }) => {
 
 
   const [splitPosition, setSplitPosition] = useState(30);
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const draggingRef = useRef(false);
 
-  const handleTouchStart = (e) => {
+  const handleTouchStart = (e:TouchEvent<HTMLButtonElement>) => {
     draggingRef.current = true;
   };
 
@@ -34,20 +34,25 @@ const Layout = ({ children }) => {
     draggingRef.current = false;
   };
 
-  const handleTouchMove = (e) => {
+  const handleTouchMove= (e: TouchEvent<HTMLDivElement>) => {
     if (draggingRef.current) {
-      const containerHeight = containerRef.current.clientHeight;
-      const touchY = e.touches[0].clientY;
-      const newSplitPosition = (touchY / containerHeight) * 100;
+      const containerHeight = containerRef && containerRef?.current && containerRef?.current.clientHeight;
+      if (containerHeight) {
+        const touchY = e.touches[0].clientY;
+        const newSplitPosition = (touchY / containerHeight) * 100;
 
-      if (newSplitPosition >= 30 && newSplitPosition <= 85) {
-        setSplitPosition(newSplitPosition);
-      } else if (newSplitPosition > 85) {
-        setSideBarOptions(false);
-        setSplitPosition(30);
+        if (newSplitPosition >= 30 && newSplitPosition <= 85) {
+          setSplitPosition(newSplitPosition);
+        } else if (newSplitPosition > 85) {
+          setSideBarOptions(false);
+          setSplitPosition(30);
+        }
       }
+
     }
   };
+
+  
 
   return (
     <>

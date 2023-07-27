@@ -1,12 +1,13 @@
 import { ActionType } from '../../ActionTypes/profile';
 import { getRequest, updateRequest, postRequest } from '../../../Service/MakeRequests';
 import { getToken } from '../../../CommonUtils/common-utils';
+import { Dispatch } from 'redux';
 
 
 
 
 //get profile data action
-export const getProfileData = () => async (dispatch) => {
+export const getProfileData = () => async (dispatch:Dispatch) => {
     const userData = await getToken();
     const id = userData?.userId;
     dispatch({ type: ActionType.GET_PROFILE_DATA_IS_PENDING });
@@ -26,7 +27,7 @@ export const getProfileData = () => async (dispatch) => {
 
 
 //update profile data action 
-export const updateProfileData = (data) => async (dispatch) => {
+export const updateProfileData = (data:any) => async (dispatch:Dispatch) => {
 
     const userData = await getToken();
     const id = userData?.userId;
@@ -56,7 +57,7 @@ export const updateProfileData = (data) => async (dispatch) => {
 }
 
 // update Profile Image action 
-export const getImageIDRequest = (data) => async (dispatch) => {
+export const getImageIDRequest = (data:any) => async (dispatch:Dispatch) => {
 
     dispatch({ type: ActionType.GET_IMAGE_ID_PENDING })
 

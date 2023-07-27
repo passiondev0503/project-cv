@@ -19,7 +19,15 @@ import UploadTabIcon from "../../assets/Svg/HomePageSvg/UploadTabIcon";
 import HistoryTabIcon from "../../assets/Svg/HomePageSvg/HistoryTabIcon";
 import DesignSectionTabs from "./DesignSectionTabs";
 
-export default function SideBarTab({ toggleProp, sideBarOption, onTouchStart, splitPosition }) {
+
+type propTypes = {
+  toggleProp:any
+  sideBarOption:any
+  onTouchStart:any
+  splitPosition:any
+}
+
+export default function SideBarTab({ toggleProp, sideBarOption, onTouchStart, splitPosition }:propTypes) {
   const [siderTogle, setSiderTogle] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
 
@@ -48,28 +56,36 @@ export default function SideBarTab({ toggleProp, sideBarOption, onTouchStart, sp
         </Tab>
         <Tab key={2} value={2} className={`place-items-start py-3 ${activeTab === 2 ? "active-tab" : ""}`} onClick={() => { activeTabHandler(); setActiveTab(2) }} >
           <div className="text-center">
-            <ElementIcon className='m-auto' />
+            <span className='m-auto'>
+            <ElementIcon  />
+            </span>
             <Typography className="text-[10px] text-grey-color">Element</Typography>
 
           </div>
         </Tab>
         <Tab key={3} value={3} className={`place-items-start py-3 ${activeTab === 3 ? "active-tab" : ""}`} onClick={() => { activeTabHandler(); setActiveTab(3) }}  >
           <div className="">
-            <TextIcon className='m-auto' />
+            <span className='m-auto'>
+            <TextIcon  />
+            </span>
             <Typography className="text-[10px] text-grey-color">History</Typography>
 
           </div>
         </Tab>
         <Tab key={4} value={4} className={`place-items-start py-3 ${activeTab === 4 ? "active-tab" : ""}`} onClick={() => { activeTabHandler(); setActiveTab(4) }}  >
           <div className="uploadtab">
-            <UploadTabIcon className='m-auto' />
+            <span className='m-auto'>
+            <UploadTabIcon  />
+            </span>
             <Typography className="text-[10px] text-grey-color">Uploads</Typography>
 
           </div>
         </Tab>
         <Tab key={5} value={5} className={`place-items-start py-3 ${activeTab === 5 ? "active-tab" : ""}`} onClick={() => { activeTabHandler(); setActiveTab(5) }}  >
           <div className="">
-            <HistoryTabIcon className='m-auto' />
+            <span className='m-auto'>
+            <HistoryTabIcon  />
+            </span>
             <Typography className="text-[10px] text-grey-color">History</Typography>
 
           </div>

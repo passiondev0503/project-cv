@@ -58,7 +58,7 @@ const Home = () => {
             </div>
             <div className="export_file  pt-2.5 pe-2.5 absolute top-2.5 right-2.5">
                 <div className='export_button flex justify-end'>
-                    <button class="rounded-[10px] bg-white px-3.5 py-3 text-sm font-normal flex gap-3 shadow shadow-[0_1px_10px_0px_rgba(155, 126, 219, 0.20)]"> <ExportSvg /> Export</button>
+                    <button className="rounded-[10px] bg-white px-3.5 py-3 text-sm font-normal flex gap-3 shadow shadow-[0_1px_10px_0px_rgba(155, 126, 219, 0.20)]"> <ExportSvg /> Export</button>
                 </div>
                 <div className='export_file_detail flex justify-end pt-2'>
                     <div className='export-fie-inner p-3 shadow shadow-[0_1px_10px_0px_rgba(155, 126, 219, 0.20)] bg-white rounded-[5px]'>

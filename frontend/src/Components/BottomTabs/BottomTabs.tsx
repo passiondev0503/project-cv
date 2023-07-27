@@ -4,7 +4,18 @@ import AirStarMobileIcon from '../../assets/Svg/MobileViewSvg/AirStarMobileIcon'
 import WindowIcon from '../../assets/Svg/MobileViewSvg/WindowIcon';
 import "../../Pages/Home/home.css"
 
-const BottomTabs = ({sideBarOptions, aiToggle , sideOptionHandle , handleAiButton}) => {
+
+
+type propTypes = {
+    sideBarOptions:any
+    aiToggle:any
+    sideOptionHandle:any
+    handleAiButton:any
+
+}
+
+
+const BottomTabs = ({sideBarOptions, aiToggle , sideOptionHandle , handleAiButton}:propTypes) => {
   return (
     <> <div className={aiToggle ? "hidden" : 'mobile_view_bottom_buttons absolute bottom-0 w-[100%] '}>
     {!sideBarOptions && <nav className='flex justify-between p-[15px]'>

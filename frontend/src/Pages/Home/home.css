@@ -96,7 +96,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         display: block;
         background-color: #18191B;
         padding: 15px 15px;
-        height: 92vh;
+        /* height: 92vh; */
     }
 
     .bg-home-white-smoke {
