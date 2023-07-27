@@ -54,7 +54,6 @@ export const updateRequest = async (slug , data)=>{
         const response = await axiosInstance.patch(slug , data);
         return response;
     }catch (error) {
-        console.error("Error occurred:", error.response);
         return error?.response
     }
 

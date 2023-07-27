@@ -43,7 +43,6 @@ const Profile = () => {
   const { data, updatedProfile, isProfileUpdated, updateProfileError, imageData, is_image_Uploaded } = useSelector((state) => state.profile)
 
   const imageUrl = imageData && imageData[0] && imageData[0].url ? imageData[0].url : data?.profilePhotoUrl;
-console.log("data" , data)
 
   const profilehandle = (event) => {
     const { name, value } = event.target;
