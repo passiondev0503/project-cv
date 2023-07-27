@@ -1,6 +1,8 @@
 .sidebar-tabs,
 .sidebar-tabs-visible {
-    height: calc(100vh - 69px);
+    /* height: calc(100vh - 69px); */
+    /* height: calc(100vh - 90px);  */
+    height: 100%;
 }
 
 .absolute.inset-0.z-10.h-full.bg-white.rounded-md.shadow {
