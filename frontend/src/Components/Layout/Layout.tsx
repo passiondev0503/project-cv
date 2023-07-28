@@ -3,6 +3,7 @@ import Header from '../GlobalComponents/Header/Header'
 import SideBarTab from '../SideBarTab/SideBarTab'
 import BottomTabs from '../BottomTabs/BottomTabs'
 import { useLocation } from "react-router-dom"
+import DraggableHOC from '../GlobalComponents/DraggableArea/DraggableArea'
 
 const Layout = ({ children }:any) => {
   const location = useLocation(); // Get the current location
@@ -56,6 +57,7 @@ const Layout = ({ children }:any) => {
 
   return (
     <>
+    <DraggableHOC>
       {!isAccessTokenPath && <Header />}
       <div className={!sideBarToggle ? "home-wrapper" : "home_wrapper_full"}
         ref={containerRef}
@@ -76,6 +78,7 @@ const Layout = ({ children }:any) => {
           }
         </div>
       </div>
+      </DraggableHOC>
     </>
   )
 }

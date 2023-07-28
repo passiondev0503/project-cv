@@ -15,9 +15,10 @@ import { Spinner } from "@material-tailwind/react";
 import '../../Home/home.css';
 
 import { useDispatch, useSelector } from "react-redux"
-import { getProfileData, updateProfileData, getImageIDRequest } from '../../../Redux/Actions/Profile/profileAction';
+import { getProfileData, updateProfileData } from '../../../Redux/Actions/Profile/profileAction';
 import LocationIcon from '../../../assets/Svg/ProfileSvg/LocationIcon';
 import { AppDispatch, RootState } from '../../../Store/store';
+import { getImageIDRequest } from '../../../Redux/Actions/ImageUpload/imageUpload';
 
 
 
@@ -80,7 +81,6 @@ const Profile = () => {
     if (file) {
       const formData = new FormData();
       formData.append('files', file);
-
       dispatch(getImageIDRequest(formData));
     }
   };

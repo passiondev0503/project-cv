@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import "./style.css";
 import {
   Tabs,
@@ -18,6 +18,10 @@ import TextIcon from "../../assets/Svg/HomePageSvg/TextIcon";
 import UploadTabIcon from "../../assets/Svg/HomePageSvg/UploadTabIcon";
 import HistoryTabIcon from "../../assets/Svg/HomePageSvg/HistoryTabIcon";
 import DesignSectionTabs from "./DesignSectionTabs";
+import NavImageUpload from "./NavImageUpload";
+import { AppDispatch, RootState } from "../../Store/store";
+import {useSelector , useDispatch} from "react-redux"
+import { getUploadPannelIamges } from "../../Redux/Actions/UploadPannel/uploadPannel";
 
 
 type propTypes = {
@@ -29,7 +33,21 @@ type propTypes = {
 
 export default function SideBarTab({ toggleProp, sideBarOption, onTouchStart, splitPosition }:propTypes) {
   const [siderTogle, setSiderTogle] = useState(false);
+
+  const {active_Tab} = useSelector((state:RootState) => state.draggableReducer)
   const [activeTab, setActiveTab] = useState(0);
+  console.log("active_Tab" , active_Tab)
+  const dispatch = useDispatch<AppDispatch>()
+
+  useEffect(() => {
+   
+    if (active_Tab == 4) {
+      dispatch(getUploadPannelIamges())
+      setActiveTab(4);
+      setSiderTogle(true);
+      toggleProp(true);
+    }
+  }, [active_Tab]);
 
   const activeTabHandler = () => {
     setSiderTogle(true)
@@ -95,12 +113,12 @@ export default function SideBarTab({ toggleProp, sideBarOption, onTouchStart, sp
       {
         siderTogle && (
           <>
-            <TabsBody style={{ height: `${100 - splitPosition}%` }} className={`py-3.5 px-6 bg-light-black relative overflow-visible  w-[350px] tab_content rounded-bl-[15px]`}
-              animate={{
-                initial: { y: 250 },
-                mount: { y: 0 },
-                unmount: { y: 250 },
-              }}
+            <TabsBody style={{ height: `${100 - splitPosition}%` }} className={`py-[14px] px-6 bg-light-black relative overflow-visible  w-[350px] tab_content rounded-bl-[15px]`}
+              // animate={{
+              //   initial: { y: 250 },
+              //   mount: { y: 0 },
+              //   unmount: { y: 250 },
+              // }}
 
             >
               <button onTouchStart={onTouchStart} className="scroll"></button>
@@ -140,6 +158,7 @@ export default function SideBarTab({ toggleProp, sideBarOption, onTouchStart, sp
                 </div>
 
               </TabPanel>
+              <NavImageUpload/>
               <div className="sidebar-close-btn absolute right-[-16px] top-[50%] translate-y-[-50%] z-10">
                 <Tooltip content="Hide" placement="right" className="right_arrow_tootltip_content">
                   <button onClick={hideHandle}><RightArrow /> </button>

@@ -57,21 +57,21 @@ export const updateProfileData = (data:any) => async (dispatch:Dispatch) => {
 }
 
 // update Profile Image action 
-export const getImageIDRequest = (data:any) => async (dispatch:Dispatch) => {
+// export const getImageIDRequest = (data:any) => async (dispatch:Dispatch) => {
 
-    dispatch({ type: ActionType.GET_IMAGE_ID_PENDING })
+//     dispatch({ type: ActionType.GET_IMAGE_ID_PENDING })
 
-    try {
-        const response = await postRequest(`/uploads`, data);
-        if (response.status === 201) {
-            dispatch({
-                type: ActionType.GET_IMAGE_ID_SUCCESS,
-                payload: response.data,
-            });
-        }
-    } catch (error) {
+//     try {
+//         const response = await postRequest(`/uploads`, data);
+//         if (response.status === 201) {
+//             dispatch({
+//                 type: ActionType.GET_IMAGE_ID_SUCCESS,
+//                 payload: response.data,
+//             });
+//         }
+//     } catch (error) {
 
-        dispatch({ type: ActionType.GET_IMAGE_ID_FAILURE , payload:error })
-        console.log(error);
-    }
-}
+//         dispatch({ type: ActionType.GET_IMAGE_ID_FAILURE , payload:error })
+//         console.log(error);
+//     }
+// }

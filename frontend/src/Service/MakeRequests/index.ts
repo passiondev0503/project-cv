@@ -44,8 +44,8 @@ export const getRequest = async (slug:string) => {
         const response = await axiosInstance.get(slug);
         return response;
     } catch (error:any) {
-        console.error("Error occurred:", error.message);
-        return Promise.reject(error.message);
+        console.error("Error occurred:", error);
+      return error?.response
     }
 };
 
@@ -62,14 +62,14 @@ export const updateRequest = async (slug:string , data:any)=>{
 }
 
 
-
+//post request
 export const postRequest = async (slug:string , data:any)=>{
     try{
         const response = await axiosInstance.post(slug , data);
         return response;
     }catch (error:any) {
-        console.error("Error occurred:", error.message);
-        return Promise.reject(error.message);
+        console.error("Error occurred:", error);
+        return error?.response
     }
 
 }

@@ -28,6 +28,9 @@
     border-style: solid;
     border-color: transparent #000000 transparent transparent;
 }
+.search-input input[type="search"]::-webkit-search-cancel-button {
+   display: none;
+    }
 
 .active-tab {
     background-color: var(--activeTab-color);
@@ -46,6 +49,9 @@
     fill: var(--purple-color);
     stroke: var(--purple-color);
 }
+.scroll{
+    display: none;
+}
 
 @media(min-width:767px) and (max-width:1920px) {
     .tab_content {
@@ -59,7 +65,7 @@
         position: fixed;
         bottom: 0px;
         width: 100%;
-        z-index: 999;
+        z-index: 99999;
         border-radius: 0px;
         left: 0px;
         padding: 16px 15px;
@@ -83,7 +89,7 @@
     }
 
     .scroll {
-
+display: block;
         background: #9B7EDB;
         height: 10px;
         width: 48px;

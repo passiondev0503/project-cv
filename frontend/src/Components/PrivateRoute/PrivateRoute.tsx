@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import Layout from '../Layout/Layout';
+import DraggableArea from '../GlobalComponents/DraggableArea/DraggableArea';
 
 const PrivateRoute = ({ children }:any) => {
     const token:any = localStorage.getItem('token');
@@ -12,9 +13,11 @@ const PrivateRoute = ({ children }:any) => {
     if (userToken && tokenExpiration && currentTimestamp < tokenExpiration) {
         return (
             <>
+            <DraggableArea>
                 <Layout>
                     {children}
                 </Layout>
+                </DraggableArea>
             </>
         );
     } else {
