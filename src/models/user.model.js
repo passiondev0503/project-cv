@@ -91,6 +91,10 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    defaultTemplateId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: 'Template',
+    }
   },
   {
     timestamps: true,

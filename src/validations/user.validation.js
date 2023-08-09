@@ -34,6 +34,7 @@ const updateUser = {
   body: Joi.object()
     .keys({
       photoUploadId: Joi.string().custom(objectId),
+      defaultTemplateId: Joi.string().custom(objectId),
       firstName: Joi.string().trim(),
       lastName: Joi.string().trim(),
       phoneNumber: Joi.string().trim(),

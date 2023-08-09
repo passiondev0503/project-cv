@@ -1,6 +1,7 @@
 const httpStatus = require('http-status');
 const { User } = require('../models');
 const ApiError = require('../utils/ApiError');
+const templateService  = require('./template.service');
 
 /**
  * Create a user
@@ -60,6 +61,15 @@ const updateUserById = async (userId, updateBody) => {
   const user = await getUserById(userId);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  //check if defaultTemplateId has been set
+  // check _id in template collection exists if the defaultTemplateId exists
+  if (updateBody.defaultTemplateId) {
+    const { defaultTemplateId } = updateBody;
+    const template = await templateService.getTemplateById(defaultTemplateId);
+    if (!template) {
+      throw new ApiError(httpStatus.NOT_FOUND, 'Template not found');
+    }
   }
   if (updateBody.email && (await User.isEmailTaken(updateBody.email, userId))) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'Email already taken');
