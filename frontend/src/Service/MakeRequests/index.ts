@@ -73,3 +73,16 @@ export const postRequest = async (slug:string , data:any)=>{
     }
 
 }
+
+
+//delete request
+export const deleteRequest = async (slug:string)=>{
+    try{
+        const response = await axiosInstance.delete(slug);
+        return response;
+    }catch (error:any) {
+        console.error("Error occurred:", error);
+        return error?.response
+    }
+
+}

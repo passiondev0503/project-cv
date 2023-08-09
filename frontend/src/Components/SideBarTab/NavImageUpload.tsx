@@ -15,7 +15,7 @@ import ProfileSvg from "../../assets/Svg/SidebarSvg/ProfileSvg";
 import DeleteSvg from "../../assets/Svg/SidebarSvg/DeleteSvg";
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../Store/store";
-import { getUploadPannelIamges } from "../../Redux/Actions/UploadPannel/uploadPannel";
+import { getUploadPannelIamges, deleteUploadPannelIamges } from "../../Redux/Actions/UploadPannel/uploadPannel";
 import { getImageIDRequest } from "../../Redux/Actions/ImageUpload/imageUpload";
 
 
@@ -24,7 +24,7 @@ const NavImageUpload = () => {
     const dispatch = useDispatch<AppDispatch>()
 
     const { image_uploaded_data , paginationData } = useSelector((state: RootState) => state.uploadPannel)
-    console.log(image_uploaded_data,paginationData, "image_uploaded_data")
+
     const handleImage =(e:any)=>{
         const file = e.target.files?.[0];
         if(file){
@@ -45,7 +45,7 @@ const NavImageUpload = () => {
     }
     useEffect(() => {
         dispatch(getUploadPannelIamges())
-    }, [])
+    }, [paginationData])
     return (
         <TabPanel key={4} value={4} className="py-0 px-0">
             <div className="search-input relative">
@@ -84,7 +84,7 @@ const NavImageUpload = () => {
 
                                             <MenuList className="min-w-[130px] py-[5px] px-[5px]">
                                                 <MenuItem className="flex justify-start gap-[10px] px-[4px] py-[6px] rounded-[10px] text-[12px] font-normal text-black-color "><ProfileSvg /> Set as Profile</MenuItem>
-                                                <MenuItem className="flex justify-start gap-[10px] px-[4px] py-[6px] rounded-[10px] text-[12px] font-normal text-black-color"><DeleteSvg />Delete</MenuItem>
+                                                <MenuItem onClick={()=>{dispatch(deleteUploadPannelIamges(item._id))}} className="flex justify-start gap-[10px] px-[4px] py-[6px] rounded-[10px] text-[12px] font-normal text-black-color"><DeleteSvg />Delete</MenuItem>
                                             </MenuList>
 
                                         </Menu>

@@ -19,7 +19,6 @@ const uploadPannel = (state = initialState, action: UploadPannelType) => {
                 is_data_uploaded: true,
             };
         case ActionType.GET_UPLOAD_PANNEL_IMAGE_SUCCESS:
-            console.log(action.payload);
             return {
                 ...state,
                 is_data_uploaded: false,
