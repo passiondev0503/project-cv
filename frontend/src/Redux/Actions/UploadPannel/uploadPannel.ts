@@ -2,12 +2,18 @@ import {Dispatch} from "redux"
 import { ActionType } from "../../ActionTypes/getUploadPannel"
 import { getRequest } from "../../../Service/MakeRequests"
 
-export const getUploadPannelIamges = ()=> async(dispatch:Dispatch)=>{
+export const getUploadPannelIamges = ( param?: any)=> async(dispatch:Dispatch)=>{
     dispatch({type:ActionType.GET_UPLOAD_PANNEL_IMAGE_PENDING})
-    try{
-        let response:any = await getRequest("/uploads")
+    try{let response:any;
+        if (param === undefined){
+            response = await getRequest("/uploads")
+        } else {
+            response = await getRequest(`/uploads?name=${param}`)
+        }
         if(response.status === 200){
             dispatch({type:ActionType.GET_UPLOAD_PANNEL_IMAGE_SUCCESS, payload:response?.data})
+        } else {
+            return;
         }
 
     }catch(error){

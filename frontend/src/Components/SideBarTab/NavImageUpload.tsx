@@ -36,6 +36,13 @@ const NavImageUpload = () => {
             return;
         }
     }
+    const searchImage = (e:any) => {
+        const value = e.target.value;
+        if(!value) {
+            return;
+        }
+        dispatch(getUploadPannelIamges(value));
+    }
     useEffect(() => {
         dispatch(getUploadPannelIamges())
     }, [])
@@ -50,6 +57,7 @@ const NavImageUpload = () => {
                         className: "hidden"
                     }}
                     containerProps={{ className: "min-w-[100px]" }}
+                    onChange={searchImage}
                 />
                 <div className="search-icon absolute bottom-3.5 right-5">
                     <Search />

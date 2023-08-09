@@ -4,6 +4,7 @@ import profileReducer from '../Redux/Reducers/Profile/ProfileReducer';
 import draggableReducer from '../Redux/Reducers/DraggableReducer/DraggableReducer';
 import imageUploadedReducer from '../Redux/Reducers/ImageUploadedReducer/imageUploadedReducer';
 import uploadPannel from '../Redux/Reducers/UploadPannelReducer/UplaodPannel';
+import { composeWithDevTools } from "redux-devtools-extension";
 
 
 const rootReducer = combineReducers({
@@ -14,7 +15,7 @@ const rootReducer = combineReducers({
 
 });
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 
 
 
