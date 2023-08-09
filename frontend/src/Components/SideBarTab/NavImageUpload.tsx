@@ -13,7 +13,6 @@ import Search from "../../assets/Svg/HomePageSvg/Search";
 import EllipsisMenuIcon from "../../assets/Svg/SidebarSvg/EllipsisMenuIcon";
 import ProfileSvg from "../../assets/Svg/SidebarSvg/ProfileSvg";
 import DeleteSvg from "../../assets/Svg/SidebarSvg/DeleteSvg";
-import IamegeUpload from "../../assets/Images/navimage.png";
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../Store/store";
 import { getUploadPannelIamges } from "../../Redux/Actions/UploadPannel/uploadPannel";
@@ -32,6 +31,9 @@ const NavImageUpload = () => {
             const formData = new FormData()
             formData.append("files" , file)
             dispatch(getImageIDRequest(formData))
+        } else {
+            console.log('File not selected.');
+            return;
         }
     }
     useEffect(() => {
