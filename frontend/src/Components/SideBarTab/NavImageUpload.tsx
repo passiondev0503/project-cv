@@ -16,6 +16,7 @@ import DeleteSvg from "../../assets/Svg/SidebarSvg/DeleteSvg";
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../Store/store";
 import { getUploadPannelIamges, deleteUploadPannelIamges } from "../../Redux/Actions/UploadPannel/uploadPannel";
+import { updateProfileData } from '../../Redux/Actions/Profile/profileAction';
 import { getImageIDRequest } from "../../Redux/Actions/ImageUpload/imageUpload";
 
 
@@ -23,7 +24,8 @@ const NavImageUpload = () => {
 
     const dispatch = useDispatch<AppDispatch>()
 
-    const { image_uploaded_data , paginationData } = useSelector((state: RootState) => state.uploadPannel)
+    const { image_uploaded_data , paginationData } = useSelector((state: RootState) => state.uploadPannel);
+    const { data } = useSelector((state:RootState) => state.profile);
 
     const handleImage =(e:any)=>{
         const file = e.target.files?.[0];
@@ -46,6 +48,22 @@ const NavImageUpload = () => {
     useEffect(() => {
         dispatch(getUploadPannelIamges())
     }, [paginationData])
+    const setUserAvatar = (value: any) => {
+        const profileData = {
+            photoUploadId: value,
+            firstName: data?.firstName,
+            lastName: data?.lastName,
+            phoneNumber: data?.phoneNumber,
+            dateOfBirth: data?.dateOfBirth?.split("T")[0],
+            websiteUrl: data?.websiteUrl,
+            linkedinUrl: data?.linkedinUrl,
+            twitterUrl: data?.twitterUrl,
+            youtubeUrl: data?.youtubeUrl,
+            location: data?.location,
+            email: data?.email,
+        }
+        dispatch(updateProfileData(profileData))
+    }
     return (
         <TabPanel key={4} value={4} className="py-0 px-0">
             <div className="search-input relative">
@@ -83,7 +101,7 @@ const NavImageUpload = () => {
                                             </MenuHandler>
 
                                             <MenuList className="min-w-[130px] py-[5px] px-[5px]">
-                                                <MenuItem className="flex justify-start gap-[10px] px-[4px] py-[6px] rounded-[10px] text-[12px] font-normal text-black-color "><ProfileSvg /> Set as Profile</MenuItem>
+                                                <MenuItem onClick={() => setUserAvatar(item._id)} className="flex justify-start gap-[10px] px-[4px] py-[6px] rounded-[10px] text-[12px] font-normal text-black-color "><ProfileSvg /> Set as Profile</MenuItem>
                                                 <MenuItem onClick={()=>{dispatch(deleteUploadPannelIamges(item._id))}} className="flex justify-start gap-[10px] px-[4px] py-[6px] rounded-[10px] text-[12px] font-normal text-black-color"><DeleteSvg />Delete</MenuItem>
                                             </MenuList>
 
