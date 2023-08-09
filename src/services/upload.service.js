@@ -122,6 +122,7 @@ const getUploadById = async (id) => {
       expires: Number(config.aws.bucketExpires),
       name: upload.name,
       contentType: upload.contentType,
+      key: upload.key
     }
   }
 
@@ -134,7 +135,7 @@ const getUploadById = async (id) => {
  * @returns {Promise<Upload>}
  */
 const deleteUploadById = async (uploadId) => {
-  const upload = await getUploadById(uploadId);
+  const upload = await Upload.findByIdAndDelete(uploadId);
   if (!upload) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Upload not found');
   }
@@ -142,9 +143,8 @@ const deleteUploadById = async (uploadId) => {
     Bucket: config.aws.bucketName,
     Key: upload.key,
   };
-
+  
   await s3.deleteObject(params).promise();
-  await upload.remove();
   return upload;
 };
 
