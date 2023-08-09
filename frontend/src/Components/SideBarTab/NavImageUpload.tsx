@@ -22,32 +22,31 @@ import { getImageIDRequest } from "../../Redux/Actions/ImageUpload/imageUpload";
 
 const NavImageUpload = () => {
 
-    const dispatch = useDispatch<AppDispatch>()
+    const dispatch = useDispatch<AppDispatch>();
+    const [filter, setFilter] = useState(undefined);
 
     const { image_uploaded_data , paginationData } = useSelector((state: RootState) => state.uploadPannel);
     const { data } = useSelector((state:RootState) => state.profile);
 
-    const handleImage =(e:any)=>{
+    const handleImage = async (e: any) => {
         const file = e.target.files?.[0];
         if(file){
             const formData = new FormData()
             formData.append("files" , file)
-            dispatch(getImageIDRequest(formData))
+            await dispatch(getImageIDRequest(formData))
+            await dispatch(getUploadPannelIamges());
         } else {
             console.log('File not selected.');
-            return;
         }
+        return;
     }
-    const searchImage = (e:any) => {
-        const value = e.target.value;
-        if(!value) {
-            return;
-        }
-        dispatch(getUploadPannelIamges(value));
+    const searchImage = async (e:any) => {
+        await setFilter(e.target.value);
+        return;
     }
     useEffect(() => {
-        dispatch(getUploadPannelIamges())
-    }, [paginationData])
+        dispatch(getUploadPannelIamges(filter? filter : undefined))
+    }, [filter])
     const setUserAvatar = (value: any) => {
         const profileData = {
             photoUploadId: value,
@@ -102,9 +101,12 @@ const NavImageUpload = () => {
 
                                             <MenuList className="min-w-[130px] py-[5px] px-[5px]">
                                                 <MenuItem onClick={() => setUserAvatar(item._id)} className="flex justify-start gap-[10px] px-[4px] py-[6px] rounded-[10px] text-[12px] font-normal text-black-color "><ProfileSvg /> Set as Profile</MenuItem>
-                                                <MenuItem onClick={()=>{dispatch(deleteUploadPannelIamges(item._id))}} className="flex justify-start gap-[10px] px-[4px] py-[6px] rounded-[10px] text-[12px] font-normal text-black-color"><DeleteSvg />Delete</MenuItem>
+                                                <MenuItem onClick={ async () => {
+                                                    await dispatch(deleteUploadPannelIamges(item._id));
+                                                    await dispatch(getUploadPannelIamges(filter? filter : undefined));
+                                                    }} 
+                                                    className="flex justify-start gap-[10px] px-[4px] py-[6px] rounded-[10px] text-[12px] font-normal text-black-color"><DeleteSvg />Delete</MenuItem>
                                             </MenuList>
-
                                         </Menu>
                                     </div>
                                 </div>
