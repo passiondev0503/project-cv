@@ -89,14 +89,14 @@
     }
 
     .scroll {
-display: block;
+        display: block;
         background: #9B7EDB;
         height: 10px;
         width: 48px;
         display: block;
         border-radius: 10px;
         position: absolute;
-        top: -20px;
+        top: 7px;
         left: 50%;
         transform: translate(-50%, -50%);
     }

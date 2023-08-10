@@ -23,7 +23,7 @@ const Home = () => {
     return (
         <>
 
-            <div className='pt-[50px] home_inner_page'>
+            <div className='pt-[50px] home_inner_page h-[calc(100vh-120px)]'>
                 <div className='shadow shadow-[0_1px_10px_0px_rgba(155, 126, 219, 0.20)] blank-page h-[520px] w-[50%] bg-white m-auto'></div>
                 <div className='fixed right-[30px] bottom-[74px] ai_writer '>
                     <Tooltip content="Ai Writer" placement="left" className='tootltip_content text-[10px]  font-medium text-white'>

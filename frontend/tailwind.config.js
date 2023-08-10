@@ -9,6 +9,7 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 module.exports = withMT({
+  mode: 'jit',
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
@@ -30,6 +31,9 @@ module.exports = withMT({
         'green-color': '#01BF62',
       },
     },
+    screens: {
+      'sm': '768px',
+    }, 
   },
   plugins: [],
 });

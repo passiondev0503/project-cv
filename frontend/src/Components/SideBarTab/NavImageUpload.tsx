@@ -85,7 +85,7 @@ const NavImageUpload = () => {
                     <input type='file' onChange={handleImage} multiple className="hidden" />
                 </label>
             </div>
-            <div className="upload_images mt-[20px] grid grid-cols-2 gap-5 h-[550px] overflow-y-auto">
+            <div className="upload_images mt-[20px] grid grid-cols-2 gap-5 h-auto h-[calc(100%-500px)]">
                 {
                     image_uploaded_data?.map((item: any, index: number) => {
                         return (

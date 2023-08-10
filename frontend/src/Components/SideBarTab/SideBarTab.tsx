@@ -113,7 +113,7 @@ export default function SideBarTab({ toggleProp, sideBarOption, onTouchStart, sp
       {
         siderTogle && (
           <>
-            <TabsBody style={{ height: `${100 - splitPosition}%` }} className={`py-[14px] px-6 bg-light-black relative overflow-visible  w-[350px] tab_content rounded-bl-[15px]`}
+            <TabsBody style={{ height: `${100 - splitPosition}%` }} className={`py-[14px] px-6 bg-light-black relative overflow-visible  w-[350px] tab_content rounded-bl-[15px] overflow-y-auto sm:overflow-visible`}
               // animate={{
               //   initial: { y: 250 },
               //   mount: { y: 0 },
@@ -122,6 +122,7 @@ export default function SideBarTab({ toggleProp, sideBarOption, onTouchStart, sp
 
             >
               <button onTouchStart={onTouchStart} className="scroll"></button>
+              <div className="relative overflow-auto sm:overflow-visible">
               <TabPanel key={1} value={1} className="py-0">
                 <div className="search-input relative">
                   <Input
@@ -159,11 +160,11 @@ export default function SideBarTab({ toggleProp, sideBarOption, onTouchStart, sp
 
               </TabPanel>
               <NavImageUpload/>
-              <div className="sidebar-close-btn absolute right-[-16px] top-[50%] translate-y-[-50%] z-10">
+              <div className="sidebar-close-btn absolute right-[-45px] top-[50%] translate-y-[-50%] z-10">
                 <Tooltip content="Hide" placement="right" className="right_arrow_tootltip_content">
                   <button onClick={hideHandle}><RightArrow /> </button>
                 </Tooltip>
-              </div>
+              </div></div>
 
             </TabsBody ></>
         )
